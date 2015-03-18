@@ -13,6 +13,7 @@ rollout rol_MyPanel "Homeworld Templates"
 		button btn4 "Capture Point" width:100 height:18
 		button btn5 "Salvage Point" width:100 height:18
 		button btn6 "Hardpoint" width:100 height:18
+		button btn7 "Ship (Selection)" width:100 height:18
 		edittext edt_A "Joint Name"
 		spinner spn_X "X Pos" range:[-1000,1000,0] type:#float
 		spinner spn_Y "Y Pos" range:[-1000,1000,0] type:#float
@@ -120,8 +121,19 @@ rollout rol_MyPanel "Homeworld Templates"
         weaponTemplate edt_A.text coord:pos rot:euler
 		)
     )
+	
+	on btn7 pressed do
+	(
+		orgName = selection[1].name;
+		local pos = [spn_X.value, spn_Y.value, spn_Z.value]
+		local euler = eulerAngles spn_XRot.value spn_YRot.value spn_ZRot.value
+		prefixVar = ""
+		
+		shipTemplate orgName coord:pos rot:euler
+		
+	)
 )
-createDialog rol_MyPanel height:320 width:300 pos:[150,200]
+createDialog rol_MyPanel height:340 width:300 pos:[150,200]
 
 PrefixVar = "first"
 SuffixVar = ""
@@ -140,6 +152,18 @@ function createDummy _name coord suffix:'suffixVar' prefix:'prefixVar' =
 	d.pos = coord
 	
 	d
+)
+
+function shipTemplate _name coord:[0,0,0] rot:(eulerAngles 0 0 0) =
+(
+	local dJoint = createDummy _name coord
+	selection[1].name = "MULT[" + _name + "]"
+	
+	append dJoint.children selection[1]
+	
+	rotate dJoint rot
+	
+	dJoint
 )
 
 function weaponTemplate _name coord:[0,0,0] rot:(eulerAngles 0 0 0) =
