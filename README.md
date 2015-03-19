@@ -8,7 +8,7 @@ See Thread below for more details.
 
 ### How do I get set up? ###
 
-* Set your repository to  "C:\Users\*NAME*\AppData\Local\Autodesk\3dsMax\2015 - 64bit\ENU\scripts\startup\HomeworldRM" for best results (script on startup).
+* Set your repository to  "C:\Users\NAME\AppData\Local\Autodesk\3dsMax\2015 - 64bit\ENU\scripts\startup\HomeworldRM" for best results (script on startup).
 
 ### Credits ###
 
